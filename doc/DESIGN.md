@@ -23,7 +23,10 @@ is calling the function `func` and passing the arguments `2` and `3`.
 
 ## Keywords
 
-- `dec`     - Declare a variable that points to a certain address.
-- `let`     - Set a declared variable to a value.
-- `print`   - Print a value.
-- `println` - Print a value with a trailing newline.
+- `dec`        - Declare a variable that points to a certain address.
+- `let`        - Set a declared variable to a value.
+- `print`      - Print a value.
+- `println`    - Print a value with a trailing newline.
+- `fn`         - Define function.
+- `if`, `else` - If and else statements.
+- `while`      - While loops.

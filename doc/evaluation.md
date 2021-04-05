@@ -44,6 +44,7 @@ Then, the stack would look like:
 This would eliminate some of the recursion in the code, making it faster.
 
 ## For and While Loops
+
 The same would be for `for` and `while` loops. For example, if we have the code:
 ```perl
 dec input;
