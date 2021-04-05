@@ -4,13 +4,14 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "lexer.hpp"
 
 namespace util
 {
     struct FileString
     {
         bool exists;
-        std::string str;
+        Lexer::LexerString str;
     };
 
     FileString read(std::string filename);    

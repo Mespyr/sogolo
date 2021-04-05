@@ -1,4 +1,5 @@
 #include "../include/util.hpp"
+#include "../include/lexer.hpp"
 
 int main(int argc, char const *argv[])
 {
@@ -14,6 +15,8 @@ int main(int argc, char const *argv[])
         std::cout << "No such file '" << argv[1] << "'." << std::endl;
         return 1;
     }
-    std::cout << code.str << std::endl;
+    Lexer::Lexer lexer{code.str};
+    lexer.tokenize();
+    // lexer.stream.print();
     return 0;
 }

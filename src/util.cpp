@@ -12,10 +12,12 @@ util::FileString util::read(std::string filename)
         std::string line;
         while(getline(file_handler, line))
         {
-            string.str += line + "\n";
+            string.str.lines.push_back(line);
+            // std::cout << string.str.lines.back();
+            string.str.str += line + "\n";
         }
         file_handler.close();
-        string.str += "\0";
+        string.str.str += "\0";
     }
     else
     {
