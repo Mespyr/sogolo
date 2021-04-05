@@ -41,10 +41,9 @@ Then, the stack would look like:
 ```
 [println x]
 ```
+This would eliminate some of the recursion in the code, making it faster.
 
 ## For and While Loops
-
-This would eliminate some of the recursion in the code, making it faster.
 The same would be for `for` and `while` loops. For example, if we have the code:
 ```perl
 dec input;
