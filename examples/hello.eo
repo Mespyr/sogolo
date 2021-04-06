@@ -1,2 +1,2 @@
 println `Hello world!`;
-println `More lines!`;
+println `Another line!`;

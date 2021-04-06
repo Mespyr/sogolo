@@ -4,7 +4,7 @@ bool Lexer::is_important_char(char c)
 {
     return (c == ';') || (c == '(') || (c == ')') || 
         (c == '[') || (c == ']') || 
-        (c == '{') || (c == '}');
+        (c == '{') || (c == '}') || (c == ',');
 }
 
 
@@ -16,13 +16,25 @@ void Lexer::Lexer::tokenize()
 
     // States
     bool in_string = false;
+    bool in_comment = false;
 
     for(int i = 0; i < code.str.length(); i++)
     {
         char chr = code.str.at(i);
 
+        if (chr == '#' and !in_string)
+        {
+            in_comment = true;
+        }
+        else if (in_comment)
+        {
+            if (chr == '\n')
+            {
+                in_comment = false;
+            }
+        }
 
-        if (chr == '`')
+        else if (chr == '`')
         {
             str_value.push_back(chr);
             in_string = !in_string;

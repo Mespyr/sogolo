@@ -9,7 +9,7 @@ if (= x `Hello`) {
 }
 else {
     println x;
-};
+}
 ```
 Once it is parsed, the AST would look like this:
 ```
@@ -45,7 +45,7 @@ This would eliminate some of the recursion in the code, making it faster.
 
 ## For and While Loops
 
-The same would be for `for` and `while` loops. For example, if we have the code:
+The same would be for `while` loops. For example, if we have the code:
 ```perl
 dec input;
 while (!= input `The secret code!`)
@@ -54,7 +54,7 @@ while (!= input `The secret code!`)
     if (!= input `The secret code!`)
     {
         println format[input ` is wrong!`];
-    };
+    }
 };
 println `You got it correct!`;
 ```

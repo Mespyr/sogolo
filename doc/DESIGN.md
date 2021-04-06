@@ -17,7 +17,7 @@ is the equivilant of `2 * (4 + 5 + (10 - 7))` in other languages.
 
 `edulo` uses brackets to indicate the calling of a function. For example:
 ```ruby
-func[2 3];
+func[2, 3];
 ```
 is calling the function `func` and passing the arguments `2` and `3`.
 
