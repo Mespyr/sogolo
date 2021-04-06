@@ -3,7 +3,12 @@
 
 std::string Token::Token::repr()
 {
-    return value + "  -  " + line + "  -  " + std::to_string(line_number);
+    std::string rep;
+    rep += "Token:\n";
+    rep += "\tValue: '" + value + "'\n";
+    rep += "\tLine: '" + line + "'\n";
+    rep += "\tLine Number: " + std::to_string(line_number) + "\n";
+    return rep;
 }
 
 void Token::TokenStream::print()

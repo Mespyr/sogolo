@@ -21,10 +21,14 @@ argparse::ArgumentHolder argparse::parse_args(std::vector<std::string> argv)
                 argslots.s_version = true;
                 break;
             } 
+            else if ((arg == "-t") || (arg == "--debug_tokens")) 
+            {
+                argslots.debug_tokens = true;
+                break;
+            } 
             else 
             {
                 argslots.filename = arg;
-                break;
             }
         }
     }
