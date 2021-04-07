@@ -19,3 +19,18 @@ void Token::TokenStream::print()
         std::cout << tok.repr() << std::endl;
     }
 }
+
+Token::Token Token::TokenStream::next()
+{
+    ptr++;
+    if (ptr >= (int) stream.size()) 
+    {
+        eof = true;
+    }
+    return stream.at(ptr-1);
+}
+
+Token::Token Token::TokenStream::peek()
+{
+    return stream.at(ptr);
+}

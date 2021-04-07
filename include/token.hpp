@@ -19,9 +19,15 @@ namespace Token
 
     class TokenStream
     {
+    private:
+        int ptr = 0;
     public:
         std::vector<Token> stream;
+        int eof = false;
+
         void print();
+        Token next();
+        Token peek();
     };
 }
 

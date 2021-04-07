@@ -1,6 +1,7 @@
 #include "../include/util.hpp"
 #include "../include/lexer.hpp"
 #include "../include/argparse.hpp"
+#include "../include/parser.hpp"
 
 void usage()
 {
@@ -13,9 +14,9 @@ void usage()
 
 int main(int argc, char const *argv[])
 {
+    // Reading Arguments
     std::vector<std::string> args(argv, argv+argc);
     argparse::ArgumentHolder argslots = argparse::parse_args(args);
-
     if (argslots.help || argslots.none)
     {
         usage();
@@ -26,13 +27,13 @@ int main(int argc, char const *argv[])
         std::cout << "Edulo Version 0.0.1" << std::endl;
         return EXIT_SUCCESS;
     }
-
     if (argslots.filename == "")
     {
         std::cerr << "Error: No files provided for parsing." << std::endl;
         return EXIT_SUCCESS;
     }
 
+    // Read file
     util::FileString code = util::read(argslots.filename);
     if (!code.exists)
     {
@@ -40,12 +41,22 @@ int main(int argc, char const *argv[])
         std::cerr << "No such file '" << argslots.filename << "'." << std::endl;
         return EXIT_FAILURE;
     }
+
+    // Tokenization
     Lexer::Lexer lexer{code.str};
     lexer.tokenize();
 
     if (argslots.debug_tokens)
     {
         lexer.stream.print();
+        return EXIT_SUCCESS;
     }
+
+    // Parsing
+    Parser::Parser parser{lexer.stream};
+    parser.parse();
+    
+    parser.debug_print();
+
     return EXIT_SUCCESS;
 }
