@@ -56,7 +56,7 @@ int main(int argc, char const *argv[])
     Parser::Parser parser{lexer.stream};
     parser.parse();
     
-    parser.debug_print();
+    parser.debug_print(parser.ast);
 
     return EXIT_SUCCESS;
 }
