@@ -2,6 +2,7 @@
 
 Different documents on the design and style of `edulo`.
 
+- [TODO](TODO.md)
 - [Design](DESIGN.md)
 - [Evaluation](evaluation.md)
-- [TODO](TODO.md)
+- [Parsing](parsing.md)

@@ -38,6 +38,26 @@ Parser::Node Parser::Parser::build_Block_from_vector(std::vector<Node> vec)
                 continue;
             }
         }
+        else if (curnode.type == BLOCK)
+        {
+            curline.push_back(curnode);
+            node.block.push_back(curline);
+            curline.clear();
+            continue;
+        }
+        else if (curnode.type == ARGMAP)
+        {
+            if (curline.size() > 0)
+            {
+                Node cn = curline.back();
+                curline.pop_back();
+                Node new_expr_node{FUNCTION_CALL};
+                new_expr_node.expr.push_back(cn);
+                new_expr_node.expr.push_back(curnode);
+                curline.push_back(new_expr_node);
+                continue;
+            }
+        }
         curline.push_back(curnode);
     }
     return node;
@@ -47,10 +67,54 @@ Parser::Node Parser::Parser::build_Block_from_vector(std::vector<Node> vec)
 Parser::Node Parser::Parser::build_ArgMap_from_vector(std::vector<Node> vec)
 {
     Node node{ARGMAP};
+    Node cn;
+    
+    // States
+    bool left_over = false;
+    bool set_cn = false;
+
     for (int i = 0; i < vec.size(); i++)
     {
         Node curnode = vec.at(i);
-        node.expr.push_back(curnode);
+        if (curnode.type == ATOM)
+        {
+            if (curnode.atom.token.value == ",")
+            {
+                if (set_cn)
+                {
+                    node.argmap.push_back(cn);
+                    left_over = false;
+                    set_cn = false;
+                    continue;
+                }
+                else 
+                {
+                    return cn;
+                }
+            }
+        }
+        else if (curnode.type == ARGMAP)
+        {
+            if (set_cn)
+            {
+                Node new_expr_node{FUNCTION_CALL};
+                new_expr_node.expr.push_back(cn);
+                new_expr_node.expr.push_back(curnode);
+                cn = new_expr_node;
+                continue;
+            }
+            else
+            {
+                return cn;
+            }
+        }
+        left_over = true;
+        cn = curnode;
+        set_cn = true;
+    }
+    if (left_over)
+    {
+        node.argmap.push_back(cn);
     }
     return node;
 }
@@ -59,10 +123,23 @@ Parser::Node Parser::Parser::build_ArgMap_from_vector(std::vector<Node> vec)
 Parser::Node Parser::Parser::build_Expression_from_vector(std::vector<Node> vec)
 {
     Node node{EXPRESSION};
+    Node cn;
     for (int i = 0; i < vec.size(); i++)
     {
         Node curnode = vec.at(i);
+        if (curnode.type == ARGMAP)
+        {
+            if (node.expr.size() > 0)
+            {
+                node.expr.pop_back();
+                Node new_expr_node{FUNCTION_CALL};
+                new_expr_node.expr.push_back(cn);
+                new_expr_node.expr.push_back(curnode);
+                curnode = new_expr_node;
+            }
+        }
         node.expr.push_back(curnode);
+        cn = curnode;
     }
     return node;
 }
@@ -173,69 +250,58 @@ void Parser::Parser::parse()
 }
 
 
+
 // Debugging
-void Parser::Parser::print_line(std::vector<Node> line, std::string indent)
-{
-    for (int i = 0; i < line.size(); i++)
-    { 
-        Node n = line.at(i);
-        if (n.type == BLOCK)
-        {
-            std::cout << indent << "BLOCK:" << std::endl;
-            debug_print(n, indent+"    ");
-            std::cout << indent << "END BLOCK:" << std::endl;
-        }
-        
-        else if (n.type == ARGMAP)
-        {
-            std::cout << indent << "ARGUMENT MAP:" << std::endl;
-            for (int i = 0; i < n.argmap.size(); i++)
-            {
-                Node line = n.argmap.at(i);
-                if (line.type == ATOM)
-                {
-                    std::cout << indent + "    " << line.atom.token.repr();
-                }
-                else
-                {
-                    std::cerr << "ERROR DISPLAYING AST ON NODE" << std::endl;
-                }
-            }
-            std::cout << indent << "END ARGUMENT MAP:" << std::endl;
-        }
-        
-        else if (n.type == EXPRESSION)
-        {
-            std::cout << indent << "EXPRESSION:" << std::endl;
-            for (int i = 0; i < n.expr.size(); i++)
-            {
-                Node line = n.expr.at(i);
-                if (line.type == ATOM)
-                {
-                    std::cout << indent + "    " << line.atom.token.repr();
-                }
-                else
-                {
-                    std::cerr << "ERROR DISPLAYING AST ON NODE" << std::endl;
-                }
-            }
-            std::cout << indent << "END EXPRESSION:" << std::endl;
-        }
-        else
-        {
-            std::cout << indent << n.atom.token.repr() << std::endl;
-        }
-    }
-}
-
-
 void Parser::Parser::debug_print(Node node, std::string indent)
 {
-    for (int i = 0; i < node.block.size(); i++)
+    if (node.type == BLOCK)
     {
-        std::cout << indent << "LINE:" << std::endl;
-        std::vector<Node> line = node.block.at(i);
-        print_line(line, indent+"    ");
-        std::cout << indent << "END LINE:" << std::endl;
+        std::cout << indent << "<block>" << std::endl;
+        for (int i = 0; i < node.block.size(); i++)
+        {
+            std::vector<Node> n = node.block.at(i);
+            std::cout << indent + "    " << "<line>" << std::endl;
+            for (int i = 0; i < n.size(); i++)
+            {
+                debug_print(n.at(i), indent + "        ");
+            }
+            std::cout << indent + "    " << "</line>" << std::endl;
+        }
+        std::cout << indent << "</block>" << std::endl;
+    }
+    else if (node.type == EXPRESSION)
+    {
+        std::cout << indent << "<expression>" << std::endl;
+        for (int i = 0; i < node.expr.size(); i++)
+        {
+            debug_print(node.expr.at(i), indent + "    ");
+        }
+        std::cout << indent << "</expression>" << std::endl;
+    }
+    else if (node.type == ARGMAP)
+    {
+        std::cout << indent << "<argument map>" << std::endl;
+        for (int i = 0; i < node.argmap.size(); i++)
+        {
+            debug_print(node.argmap.at(i), indent + "    ");
+        }
+        std::cout << indent << "</argument map>" << std::endl;
+    }
+    else if (node.type == FUNCTION_CALL)
+    {
+        std::cout << indent << "<function>" << std::endl;
+        for (int i = 0; i < node.expr.size(); i++)
+        {
+            debug_print(node.expr.at(i), indent + "    ");
+        }
+        std::cout << indent << "</function>" << std::endl;
+    }
+    else
+    {
+        std::cout << indent << "<atom>" << std::endl;
+        std::cout << indent + "    " << "Value = '" << node.atom.token.value << "'," << std::endl;
+        std::cout << indent + "    " << "Line Number = " << node.atom.token.line_number << "," << std::endl;
+        std::cout << indent + "    " << "Line Contents = '" << node.atom.token.line << "'," << std::endl;
+        std::cout << indent << "</atom>" << std::endl;
     }
 }

@@ -15,6 +15,7 @@ namespace argparse
         bool none = false;
         bool s_version = false;
         bool debug_tokens = false;
+        bool debug_ast = false;
     };
     ArgumentHolder parse_args(std::vector<std::string> argv);
 } // namespace argparse

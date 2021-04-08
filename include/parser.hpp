@@ -11,7 +11,7 @@ namespace Parser
         BLOCK,
         EXPRESSION,
         ARGMAP,
-        LINE,
+        FUNCTION_CALL,
         ATOM
     };
 
@@ -32,6 +32,7 @@ namespace Parser
         std::vector<std::vector<Node>> block;
         std::vector<Node> expr;
         std::vector<Node> argmap;
+
         Atom atom;
     };
 
@@ -60,7 +61,6 @@ namespace Parser
 
         // Debugging
         void debug_print(Node node, std::string indent = "");
-        void print_line(std::vector<Node> line, std::string indent = "");
     };
 
 

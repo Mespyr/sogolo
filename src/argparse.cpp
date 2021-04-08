@@ -26,6 +26,11 @@ argparse::ArgumentHolder argparse::parse_args(std::vector<std::string> argv)
                 argslots.debug_tokens = true;
                 break;
             } 
+            else if ((arg == "-p") || (arg == "--read_ast")) 
+            {
+                argslots.debug_ast = true;
+                break;
+            } 
             else 
             {
                 argslots.filename = arg;
