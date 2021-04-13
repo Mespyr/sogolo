@@ -8,11 +8,12 @@ namespace Parser
 {
     enum ASTNodeType
     {
-        BLOCK,
-        EXPRESSION,
-        ARGMAP,
-        FUNCTION_CALL,
-        ATOM
+        AST_BLOCK,
+        AST_LINE,
+        AST_EXPRESSION,
+        AST_ARGMAP,
+        AST_FUNCTION_CALL,
+        AST_ATOM
     };
 
 
@@ -45,10 +46,12 @@ namespace Parser
         Token::TokenStream stream;
         Node ast;
 
+        // Errors
         bool error_found = false;
         error_type ErrorType;
         EOF_ERROR eof_error;
         PARSING_ERROR parsing_error;
+        std::string get_error();
 
         // Functions
         void parse();

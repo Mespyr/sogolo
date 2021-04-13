@@ -56,6 +56,12 @@ int main(int argc, char const *argv[])
     Parser::Parser parser{lexer.stream};
     parser.parse();
     
+    if (parser.error_found)
+    {
+        std::cout << "\x1B[31m" << parser.get_error() << "\033[0m";
+        return 1;
+    }
+
     if (argslots.debug_ast)
     {
         parser.debug_print(parser.ast);
