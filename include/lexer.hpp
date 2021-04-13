@@ -1,5 +1,5 @@
-#ifndef EDULO_LEXER_H
-#define EDULO_LEXER_H
+#ifndef FENNEC_LEXER_H
+#define FENNEC_LEXER_H
 
 #include "token.hpp"
 

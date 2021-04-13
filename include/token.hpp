@@ -1,5 +1,5 @@
-#ifndef EDULO_TOKEN_H
-#define EDULO_TOKEN_H
+#ifndef FENNEC_TOKEN_H
+#define FENNEC_TOKEN_H
 
 #include <vector>
 #include <string>

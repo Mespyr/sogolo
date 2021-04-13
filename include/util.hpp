@@ -1,5 +1,5 @@
-#ifndef EDULO_UTILS_H
-#define EDULO_UTILS_H
+#ifndef FENNEC_UTILS_H
+#define FENNEC_UTILS_H
 
 #include <iostream>
 #include <fstream>

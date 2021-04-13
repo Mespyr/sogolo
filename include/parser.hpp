@@ -1,5 +1,5 @@
-#ifndef EDULO_PARSER_H
-#define EDULO_PARSER_H
+#ifndef FENNEC_PARSER_H
+#define FENNEC_PARSER_H
 
 #include "token.hpp"
 #include "error.hpp"

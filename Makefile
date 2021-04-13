@@ -4,7 +4,7 @@ LDFLAGS = -g
 SRC = $(wildcard src/*.cpp)
 HDR = $(wildcard include/*.hpp)
 OBJ = $(SRC:.cpp=.o)
-EXEC = edulo
+EXEC = fennec
 
 all: $(SRC) $(OBJ) $(EXEC)
 

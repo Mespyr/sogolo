@@ -1,5 +1,5 @@
-#ifndef EDULO_ERROR_H
-#define EDULO_ERROR_H
+#ifndef FENNEC_ERROR_H
+#define FENNEC_ERROR_H
 
 #include "token.hpp"
 

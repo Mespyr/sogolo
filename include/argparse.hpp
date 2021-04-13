@@ -1,5 +1,5 @@
-#ifndef EDULO_ARGPARSE_H
-#define EDULO_ARGPARSE_H
+#ifndef FENNEC_ARGPARSE_H
+#define FENNEC_ARGPARSE_H
 
 #include <string>
 #include <vector>
