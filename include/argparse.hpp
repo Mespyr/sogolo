@@ -5,10 +5,8 @@
 #include <vector>
 #include <iostream>
 
-namespace argparse
-{
-    class ArgumentHolder
-    {
+namespace argparse {
+    class ArgumentHolder {
     public:
         std::string filename;
         bool help = false;

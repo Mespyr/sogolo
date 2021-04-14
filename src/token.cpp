@@ -1,36 +1,30 @@
 #include "../include/token.hpp"
 
-
-std::string Token::Token::repr()
-{
-    std::string rep;
-    rep += "Token:\n";
-    rep += "\tValue: '" + value + "'\n";
-    rep += "\tLine: '" + line + "'\n";
-    rep += "\tLine Number: " + std::to_string(line_number) + "\n";
-    return rep;
-}
-
-void Token::TokenStream::print()
-{
-    for (int i = 0; i < stream.size(); i++)
-    {
-        Token tok = stream.at(i);
-        std::cout << tok.repr() << std::endl;
+namespace Token {
+    std::string Token::repr() {
+        std::string rep;
+        rep += "Token:\n";
+        rep += "\tValue: '" + value + "'\n";
+        rep += "\tLine: '" + line + "'\n";
+        rep += "\tLine Number: " + std::to_string(line_number) + "\n";
+        return rep;
     }
-}
 
-Token::Token Token::TokenStream::next()
-{
-    ptr++;
-    if (ptr >= (int) stream.size()) 
-    {
-        eof = true;
+    void TokenStream::print() {
+        for (int i = 0; i < stream.size(); i++) {
+            Token tok = stream.at(i);
+            std::cout << tok.repr() << std::endl;
+        }
     }
-    return stream.at(ptr-1);
-}
 
-Token::Token Token::TokenStream::peek()
-{
-    return stream.at(ptr);
-}
+    Token TokenStream::next() {
+        ptr++;
+        if (ptr >= (int) stream.size())
+            eof = true;
+        return stream.at(ptr-1);
+    }
+
+    Token TokenStream::peek() {
+        return stream.at(ptr);
+    }
+} // namespace Token

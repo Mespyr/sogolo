@@ -4,10 +4,8 @@
 #include "token.hpp"
 #include "error.hpp"
 
-namespace Parser
-{
-    enum ASTNodeType
-    {
+namespace Parser {
+    enum ASTNodeType {
         AST_BLOCK,
         AST_LINE,
         AST_EXPRESSION,
@@ -18,16 +16,14 @@ namespace Parser
 
 
     // Atom. Holds token.
-    class Atom
-    {
+    class Atom {
     public:
         Token::Token token;
     };
 
 
-    // Base type. Can either by Block, Expression, ArgMap, or Atom.
-    class Node
-    {
+    // Base type. Can either by Block, Expression, ArgMap, Line, or Atom.
+    class Node {
     public:
         ASTNodeType type;
         std::vector<std::vector<Node>> block;
@@ -40,8 +36,7 @@ namespace Parser
 
 
     // Parser stuff
-    class Parser
-    {
+    class Parser {
     public:
         Token::TokenStream stream;
         Node ast;
@@ -68,6 +63,5 @@ namespace Parser
 
 
 } // namespace Parser
-
 
 #endif

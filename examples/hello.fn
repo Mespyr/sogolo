@@ -1,2 +1,2 @@
-println `Hello world!`;
-println `Another line!`;
+cout `Hello world!`;
+cout `Another line!`;

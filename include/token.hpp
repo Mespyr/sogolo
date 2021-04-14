@@ -5,10 +5,8 @@
 #include <string>
 #include <iostream>
 
-namespace Token
-{
-    class Token
-    {
+namespace Token {
+    class Token {
     public:
         std::string line;
         unsigned int line_number;
@@ -17,8 +15,7 @@ namespace Token
     };
 
 
-    class TokenStream
-    {
+    class TokenStream {
     private:
         int ptr = 0;
     public:

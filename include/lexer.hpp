@@ -4,17 +4,14 @@
 #include "token.hpp"
 
 
-namespace Lexer
-{
-    class LexerString
-    {
+namespace Lexer {
+    class LexerString {
     public:
         std::vector<std::string> lines;
         std::string str;
     };
 
-    class Lexer
-    {
+    class Lexer {
     public: 
         LexerString code;
         Token::TokenStream stream;
@@ -22,6 +19,6 @@ namespace Lexer
     };
 
     bool is_important_char(char c);
-}
+} // namespace Lexer
 
 #endif
