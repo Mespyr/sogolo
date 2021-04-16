@@ -1,3 +1,5 @@
-# error test 2
+# Error test 2
 
-let x = [1, 2, 3];   # should raise error, since ArgMap can't be all alone
+let expr = ([1, 2, 3], 1);
+
+let func_call = func[[1, 2, 3]];

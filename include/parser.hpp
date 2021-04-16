@@ -57,6 +57,8 @@ namespace Parser {
         error_type ErrorType;
         EOF_ERROR eof_error;
         PARSING_ERROR parsing_error;
+        PARSING_ERROR_NO_TOKEN no_token_parsing_error;
+
         std::string get_error();
 
         // Functions
