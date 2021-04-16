@@ -20,7 +20,7 @@ int main(int argc, char const *argv[]) {
         return EXIT_SUCCESS;
     }
     if (argslots.s_version) {
-        std::cout << "Fennec Version Dev" << std::endl;
+        std::cout << "Fennec Development Version." << std::endl;
         return EXIT_SUCCESS;
     }
     if (argslots.filename == "") {

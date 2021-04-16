@@ -4,4 +4,4 @@
 
 # if (= 1 2
 
-decl xo = func[1, 2, other[2, 3];
+let xo = func[1, 2, other[2, 3];

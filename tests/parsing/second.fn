@@ -3,12 +3,7 @@
 # Functions called inside expressions,
 # and ArgMaps
 
-# functions
-decl func;
-decl square;
-
-
-decl x = list[1, 2, 3];
+let x = list[1, 2, 3];
 fn func[x, y] {
     cout `Hello world`;
     cout (+ x y);
@@ -21,5 +16,5 @@ fn square[x] {
     return (* x x);
 }
 
-decl y = (+ square[12] square[13]);
-decl sqsq = square[square[12]];
+let y = (+ square[12] square[13]);
+let sqsq = square[square[12]];

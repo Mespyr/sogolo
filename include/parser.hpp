@@ -14,28 +14,39 @@ namespace Parser {
         AST_ATOM
     };
 
-
-    // Atom. Holds token.
-    class Atom {
-    public:
-        Token::Token token;
+    enum AtomType {
+        OBJ_STRING,
+        OBJ_NUMBER,
+        OBJ_CHAR,
+        AST_SYMBOL
     };
+    std::string get_type(AtomType tp);
 
 
     // Base type. Can either by Block, Expression, ArgMap, Line, or Atom.
     class Node {
     public:
         ASTNodeType type;
-        std::vector<std::vector<Node>> block;
-        std::vector<Node> expr;
-        std::vector<Node> argmap;
+        std::vector<Node> nodes;
 
-        Atom atom;
+        // Location of node in file
+        std::string line;
+        unsigned int line_number;
+
+        std::string value;
+        AtomType atom_type;
     };
 
+    // Functions
+    AtomType generate_atom_type(std::string str);
+    bool is_number(const std::string& s);
+    std::string get_type(AtomType tp);
 
 
-    // Parser stuff
+
+
+
+    // Parser
     class Parser {
     public:
         Token::TokenStream stream;
@@ -52,13 +63,14 @@ namespace Parser {
         void parse();
         Node parse_next_node();
 
-        Node build_Block_from_vector(std::vector<Node> vec);
-        Node build_Expression_from_vector(std::vector<Node> vec);
-        Node build_ArgMap_from_vector(std::vector<Node> vec);
+        Node build_Block_from_vector(std::vector<Node> vec, std::string line, unsigned int line_number);
+        Node build_Expression_from_vector(std::vector<Node> vec, std::string line, unsigned int line_number);
+        Node build_ArgMap_from_vector(std::vector<Node> vec, std::string line, unsigned int line_number);
 
 
         // Debugging
         void debug_print(Node node, std::string indent = "");
+        void debug_print_vector(Node node, std::string indent);
     };
 
 

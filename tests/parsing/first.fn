@@ -1,7 +1,7 @@
 # Parsing test for Edulo
 # run this with the -p or --read_ast flag
 
-decl x = 12;
+let x = 12;
 if (= x 12) {
     cout `True!`;
 }
