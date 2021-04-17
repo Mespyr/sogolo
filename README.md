@@ -1,2 +1,2 @@
 # Fennec
-A small programming language written in C++.
+Fennec is a small programming language written in C++.

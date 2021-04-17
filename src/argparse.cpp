@@ -17,7 +17,7 @@ namespace argparse
                     argslots.s_version = true;
                     break;
                 } 
-                else if ((arg == "-t") || (arg == "--debug_tokens")) {
+                else if ((arg == "-t") || (arg == "--read_tokens")) {
                     argslots.debug_tokens = true;
                     break;
                 } 

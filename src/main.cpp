@@ -8,7 +8,8 @@ void usage() {
     std::cerr << "OPTIONS:" << std::endl;
     std::cerr << "\t-h,  --help         | Show this page." << std::endl;
     std::cerr << "\t-v,  --version      | Show version number." << std::endl;
-    std::cerr << "\t-t,  --debug_tokens | Debug token stream." << std::endl;
+    std::cerr << "\t-t,  --read_tokens  | Read token stream." << std::endl;
+    std::cerr << "\t-p,  --read_ast     | Read AST." << std::endl;
 }
 
 int main(int argc, char const *argv[]) {
@@ -37,7 +38,8 @@ int main(int argc, char const *argv[]) {
     }
 
     // Tokenization
-    Lexer::Lexer lexer{code.str};
+    Lexer::Lexer lexer;
+    lexer.code = code.str;
     lexer.tokenize();
 
     if (argslots.debug_tokens) {
