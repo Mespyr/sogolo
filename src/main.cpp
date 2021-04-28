@@ -1,7 +1,7 @@
-#include "../include/util.hpp"
-#include "../include/lexer.hpp"
-#include "../include/argparse.hpp"
-#include "../include/parser.hpp"
+#include "util.hpp"
+#include "lexer.hpp"
+#include "argparse.hpp"
+#include "parser.hpp"
 
 void usage() {
     std::cerr << "Usage: fennec <FILENAME> <OPTIONS>" << std::endl;
@@ -48,15 +48,15 @@ int main(int argc, char const *argv[]) {
     }
 
     // Parsing
-    Parser::Parser parser{lexer.stream};
-    parser.parse();
+    // Parser::Parser parser{lexer.stream};
+    // parser.parse();
     
-    if (parser.error_found) {
-        std::cout << parser.get_error();
-        return EXIT_FAILURE;
-    }
+    // if (parser.error_found) {
+    //     std::cout << parser.get_error();
+    //     return EXIT_FAILURE;
+    // }
 
-    if (argslots.debug_ast)
-        parser.debug_print(parser.ast);
+    // if (argslots.debug_ast)
+    //     parser.debug_print(parser.ast);
     return EXIT_SUCCESS;
 }

@@ -1,4 +1,4 @@
-# Parsing test for Edulo
+# Parsing test for Sogolo
 # run this with the -p or --read_ast flag
 
 let x = 12;

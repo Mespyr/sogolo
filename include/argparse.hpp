@@ -1,5 +1,5 @@
-#ifndef FENNEC_ARGPARSE_H
-#define FENNEC_ARGPARSE_H
+#ifndef ARGPARSE_H
+#define ARGPARSE_H
 
 #include <string>
 #include <vector>

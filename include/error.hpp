@@ -1,5 +1,5 @@
-#ifndef FENNEC_ERROR_H
-#define FENNEC_ERROR_H
+#ifndef ERROR_H
+#define ERROR_H
 
 #include "token.hpp"
 

@@ -1,4 +1,4 @@
-#include "../include/lexer.hpp"
+#include "lexer.hpp"
 
 namespace Lexer {
     bool is_important_char(char c) {

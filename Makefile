@@ -1,10 +1,10 @@
 CPP = g++
-CPPFLAGS = -c -g
+CPPFLAGS = -c -g -I./include
 LDFLAGS = -g
 SRC = $(wildcard src/*.cpp)
 HDR = $(wildcard include/*.hpp)
 OBJ = $(SRC:.cpp=.o)
-EXEC = fennec
+EXEC = sogolo
 
 all: $(SRC) $(OBJ) $(EXEC)
 

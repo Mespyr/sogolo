@@ -1,4 +1,4 @@
-#include "../include/token.hpp"
+#include "token.hpp"
 
 namespace Token {
     std::string Token::repr() {

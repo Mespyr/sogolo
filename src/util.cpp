@@ -1,4 +1,4 @@
-#include "../include/util.hpp"
+#include "util.hpp"
 
 namespace util {
     FileString read(std::string filename) {

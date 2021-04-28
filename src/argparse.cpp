@@ -1,4 +1,4 @@
-#include "../include/argparse.hpp"
+#include "argparse.hpp"
 namespace argparse
 {
     ArgumentHolder parse_args(std::vector<std::string> argv) {

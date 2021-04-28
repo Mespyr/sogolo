@@ -1,5 +1,5 @@
-#ifndef FENNEC_TOKEN_H
-#define FENNEC_TOKEN_H
+#ifndef TOKEN_H
+#define TOKEN_H
 
 #include <vector>
 #include <string>
