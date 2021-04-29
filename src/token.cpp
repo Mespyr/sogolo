@@ -1,6 +1,7 @@
 #include "token.hpp"
 
 namespace Token {
+
     std::string Token::repr() {
         std::string rep;
         rep += "Token:\n";
