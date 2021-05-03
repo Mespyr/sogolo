@@ -4,7 +4,7 @@
 #include "parser.hpp"
 
 void usage() {
-    std::cerr << "Usage: fennec <FILENAME> <OPTIONS>" << std::endl;
+    std::cerr << "Usage: sogolo <FILENAME> <OPTIONS>" << std::endl;
     std::cerr << "OPTIONS:" << std::endl;
     std::cerr << "\t-h,  --help         | Show this page." << std::endl;
     std::cerr << "\t-v,  --version      | Show version number." << std::endl;
@@ -21,7 +21,7 @@ int main(int argc, char const *argv[]) {
         return EXIT_SUCCESS;
     }
     if (argslots.s_version) {
-        std::cout << "Fennec Development Version." << std::endl;
+        std::cout << "Sogolo Development Version." << std::endl;
         return EXIT_SUCCESS;
     }
     if (argslots.filename == "") {

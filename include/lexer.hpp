@@ -22,11 +22,11 @@ namespace Lexer {
         std::string current_line;
         char current_char;
         bool eof = false;
+        bool in_comment = false;
 
         void make_string();
         void make_number();
         void make_symbol();
-        void skip_comment();
 
         void advance();
         void tokenize();

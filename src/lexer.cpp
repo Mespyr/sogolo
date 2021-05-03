@@ -14,25 +14,24 @@ namespace Lexer {
             eof = true;
     }
 
-    void Lexer::skip_comment() {
-        while (current_char != '\n' and !eof) {
-            advance();
-        }
-    }
-
     void Lexer::tokenize() {
         current_line = code.lines.at(0);
 
         while (!eof) {
             advance();
             if (eof) break;
+
+            if (in_comment)
+                if (current_char == '\n')
+                    in_comment = false;
+
             if (isspace(current_char)) 
                 continue;
             
             switch (current_char)
             {
                 case '#':
-                    skip_comment();
+                    in_comment = true;
                     break;
 
                 case ';':
