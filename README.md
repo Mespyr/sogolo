@@ -17,3 +17,9 @@ make
 ```
 
 This will make the executable `sogolo`.
+
+To remove all the unnecesary files afterward, you can run
+```bash
+bash clean.sh
+```
+to remove the CMake files and the executable.
