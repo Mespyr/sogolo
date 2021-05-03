@@ -1,7 +1,7 @@
 # Sogolo
 Sogolo is a small programming language written in C++.
 
-# Install
+## Install
 To build sogolo, you must have CMake installed on your computer.
 
 You must first clone the repository by running
