@@ -8,6 +8,7 @@ namespace Token {
         rep += "\tValue: '" + value + "'\n";
         rep += "\tLine: '" + line + "'\n";
         rep += "\tLine Number: " + std::to_string(line_number) + "\n";
+        rep += "\tType: " + std::to_string(type) + "\n";
         return rep;
     }
 

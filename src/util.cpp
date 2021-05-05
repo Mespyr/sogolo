@@ -18,6 +18,7 @@ namespace util {
         }
         else
             string.exists = false;
+
         return string;
     }
 } // namespace util

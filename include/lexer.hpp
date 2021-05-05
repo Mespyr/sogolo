@@ -24,11 +24,14 @@ namespace Lexer {
         bool eof = false;
         bool in_comment = false;
 
+        // Make objects
         void make_string();
         void make_number();
         void make_symbol();
 
         void advance();
+        void stepdown();
+
         void tokenize();
     };
 } // namespace Lexer

@@ -1,6 +1,7 @@
 #include "lexer.hpp"
 
 namespace Lexer {
+    // Move lexer to next char
     void Lexer::advance() {
         idx++;
         if (idx < (int) code.str.length()-1) {
@@ -14,16 +15,137 @@ namespace Lexer {
             eof = true;
     }
 
+    // Move lexer to previous char
+    void Lexer::stepdown() {
+        idx--;
+        if (current_char == '\n') {
+            line_number--;
+            current_line = code.lines.at(line_number-1);
+        }
+        current_char = code.str.at(idx);
+    }
+
+    // Generate number token
+    void Lexer::make_number() {
+        std::string numeric;
+
+        int dot_count = 0;
+
+        numeric.push_back(current_char);
+
+        while (!eof) {
+            advance();
+            if (current_char == '\n') {
+                stepdown();
+                break;
+            }
+
+            if (eof)
+                break;
+            
+            if (current_char == '.') {
+                if (dot_count) 
+                    return;
+                dot_count++;
+            }
+
+            else if (!isdigit(current_char)) {
+                if (
+                    current_char == '(' || 
+                    current_char == ')' ||
+                    current_char == '[' ||
+                    current_char == ']' ||
+                    current_char == '{' ||
+                    current_char == '}' ||
+                    current_char == ';' ||
+                    current_char == '#' ||
+                    current_char == ',' ||
+                    isspace(current_char)
+                ) {
+                    stepdown();
+                    break;
+                }
+                else 
+                    return;
+            }
+            
+            numeric.push_back(current_char);
+        }
+        if (dot_count) 
+            stream.stream.push_back(Token::Token(Token::TT_FLOAT, current_line, line_number, numeric));
+        else
+            stream.stream.push_back(Token::Token(Token::TT_INT, current_line, line_number, numeric));
+        
+    }
+
+    // Generate symbol token
+    void Lexer::make_symbol() {
+        std::string symbol;
+        symbol.push_back(current_char);
+
+        while (!eof) {
+            advance();
+            if (current_char == '\n') {
+                stepdown();
+                break;
+            }
+
+            if (eof)
+                break;
+
+            if (current_char == '(' || 
+                current_char == ')' ||
+                current_char == '[' ||
+                current_char == ']' ||
+                current_char == '{' ||
+                current_char == '}' ||
+                current_char == '{' ||
+                current_char == ';' ||
+                current_char == '#' ||
+                current_char == ',' ||
+                isspace(current_char)
+                ) {
+                    stepdown();
+                    break;
+                }
+
+            symbol.push_back(current_char);
+        }
+
+        stream.stream.push_back(Token::Token(Token::TT_SYMBOL, current_line, line_number, symbol));
+    }
+
+    // Generate string token
+    void Lexer::make_string() {
+        std::string string;
+        string.push_back(current_char);
+
+        while (!eof) {
+            advance();
+            if (eof) 
+                return;
+            
+            string.push_back(current_char);
+
+            if (current_char == '`') 
+                break;
+        }
+        stream.stream.push_back(Token::Token(Token::TT_STRING, current_line, line_number, string));
+    }
+
     void Lexer::tokenize() {
         current_line = code.lines.at(0);
 
         while (!eof) {
             advance();
-            if (eof) break;
+            if (eof) 
+                break;
 
-            if (in_comment)
+            if (in_comment) {
                 if (current_char == '\n')
                     in_comment = false;
+                continue;
+            }
 
             if (isspace(current_char)) 
                 continue;
@@ -56,6 +178,7 @@ namespace Lexer {
 
                 case ']':
                     stream.stream.push_back(Token::Token(Token::TT_RBRACE, current_line, line_number, "]"));
+                    break;
 
                 case '{':
                     stream.stream.push_back(Token::Token(Token::TT_LCBRACE, current_line, line_number, "{"));
@@ -65,11 +188,15 @@ namespace Lexer {
                     stream.stream.push_back(Token::Token(Token::TT_RCBRACE, current_line, line_number, "}"));
                     break;
 
+                case '`':
+                    make_string();
+                    break;
+
                 default:
-                    // if (isalnum(current_char)) 
-                    //     make_number();
-                    // else 
-                    //     make_symbol();
+                    if (isdigit(current_char)) 
+                        make_number();
+                    else
+                        make_symbol();
                     break;
             }
         }

@@ -1,0 +1,5 @@
+let x = `Hello world`;
+if (= x `Hello`) {
+    print x;
+    print `This shouldn't print`;
+}
