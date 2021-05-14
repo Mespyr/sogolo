@@ -1,20 +1,29 @@
 #ifndef LEXER_H
 #define LEXER_H
 
+#include <vector>
+#include <string>
+
 #include "token.hpp"
+#include "errors.hpp"
 
-
-namespace Lexer {
-    class LexerString {
+namespace Sogolo 
+{
+    class String
+    {
     public:
         std::vector<std::string> lines;
         std::string str;
     };
 
-    class Lexer {
-    public: 
-        LexerString code;
-        Token::TokenStream stream;
+    class Lexer
+    {
+    public:
+        Lexer(String c);
+        ~Lexer();
+
+        String code;
+        TokenStream stream;
 
         int line_number = 1;
         int idx = -1;
@@ -23,6 +32,12 @@ namespace Lexer {
         char current_char;
         bool eof = false;
         bool in_comment = false;
+
+        // Error
+        bool error_found = false;
+        Error error;
+
+        std::string em;
 
         // Make objects
         void make_string();
@@ -33,7 +48,11 @@ namespace Lexer {
         void stepdown();
 
         void tokenize();
+
+
     };
-} // namespace Lexer
+    
+
+} // namespace Sogolo
 
 #endif

@@ -5,9 +5,14 @@
 #include <vector>
 #include <iostream>
 
-namespace argparse {
-    class ArgumentHolder {
+namespace Sogolo 
+{
+    class ArgumentHolder
+    {
     public:
+        ArgumentHolder(std::vector<std::string>& argv);
+        ~ArgumentHolder();
+
         std::string filename;
         bool help = false;
         bool none = false;
@@ -15,8 +20,8 @@ namespace argparse {
         bool debug_tokens = false;
         bool debug_ast = false;
     };
-    ArgumentHolder parse_args(std::vector<std::string> argv);
-} // namespace argparse
+    
+} // namespace Sogolo
 
 
 #endif

@@ -1,24 +1,27 @@
 #include "util.hpp"
 
-namespace util {
-    FileString read(std::string filename) {
-        FileString string;
+namespace Sogolo 
+{
+    File::File(const std::string& filename)
+    {
         std::ifstream file_handler;
         file_handler.open(filename);
-        if (file_handler.is_open()) {
-            string.exists = true;
+        if (file_handler.is_open()) 
+        {
+            exists = true;
             std::string line;
-            while(getline(file_handler, line)) {
-                string.str.lines.push_back(line);
-                // std::cout << string.str.lines.back();
-                string.str.str += line + "\n";
+            while(getline(file_handler, line)) 
+            {
+                str.lines.push_back(line);
+                str.str += line + "\n";
             }
             file_handler.close();
-            string.str.str += "\0";
+            str.str += "\0";
         }
         else
-            string.exists = false;
-
-        return string;
+            exists = false;
     }
-} // namespace util
+    
+    File::~File()
+    {}
+} // namespace Sogolo

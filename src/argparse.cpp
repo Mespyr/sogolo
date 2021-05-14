@@ -1,35 +1,42 @@
 #include "argparse.hpp"
-namespace argparse
+namespace Sogolo
 {
-    ArgumentHolder parse_args(std::vector<std::string> argv) {
-        ArgumentHolder argslots;
+    ArgumentHolder::ArgumentHolder(std::vector<std::string>& argv)
+    {
         if (argv.size() == 1)
-            argslots.none = true;
+            none = true;
 
-        else {
-            for (int i = 1; i < argv.size(); ++i) {
+        else 
+        {
+            for (int i = 1; i < argv.size(); ++i) 
+            {
                 std::string arg = argv.at(i);
-                if ((arg == "-h") || (arg == "--help")) {
-                    argslots.help = true;
-                    break;
+                if ((arg == "-h") || (arg == "--help")) 
+                {
+                    help = true;
                 } 
-                else if ((arg == "-v") || (arg == "--version")) {
-                    argslots.s_version = true;
-                    break;
+                else if ((arg == "-v") || (arg == "--version")) 
+                {
+                    s_version = true;
                 } 
-                else if ((arg == "-t") || (arg == "--read_tokens")) {
-                    argslots.debug_tokens = true;
-                    break;
+                else if ((arg == "-t") || (arg == "--read_tokens")) 
+                {
+                    debug_tokens = true;
                 } 
-                else if ((arg == "-p") || (arg == "--read_ast")) {
-                    argslots.debug_ast = true;
-                    break;
+                else if ((arg == "-p") || (arg == "--read_ast")) 
+                {
+                    debug_ast = true;
                 } 
                 else 
-                    argslots.filename = arg;
+                {
+                    filename = arg;
+                    break;
+                }
             }
         }
-        return argslots;
     }
-} // namespace argparse
+    
+    ArgumentHolder::~ArgumentHolder()
+    {}
+} // namespace Sogolo
 

@@ -6,14 +6,19 @@
 #include <string>
 #include "lexer.hpp"
 
-namespace util {
-    struct FileString {   // Hold file content in string
-        bool exists;
-        Lexer::LexerString str;
-    };
+namespace Sogolo 
+{
+    // Hold file content in string
+    class File
+    {
+    public:
+        File(const std::string& filename);
+        ~File();
 
-    FileString read(std::string filename);
-} // namespace util
+        bool exists;
+        String str;
+    };
+} // namespace Sogolo
 
 
 #endif

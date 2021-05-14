@@ -5,7 +5,8 @@
 #include <string>
 #include <iostream>
 
-namespace Token {
+namespace Sogolo
+{
     enum TokenType {
         TT_FLOAT, 
         TT_INT, 
@@ -21,31 +22,41 @@ namespace Token {
         TT_COMMA
     };
 
-    class Token {
+    class Token
+    {
     public:
+        Token(TokenType t, std::string l, unsigned int ln, std::string v);
+        ~Token();
+
         std::string line;
         unsigned int line_number;
         std::string value;
 
         TokenType type;
         std::string repr();
-        Token(TokenType t, std::string l, unsigned int ln, std::string v) : 
-            type(t), line(l), line_number(ln), value(v) 
-        {}
     };
 
-
-    class TokenStream {
+    class TokenStream
+    {
     private:
         int ptr = 0;
     public:
+        TokenStream();
+        ~TokenStream();
+
+
         std::vector<Token> stream;
         int eof = false;
 
         void print();
+        
         Token next();
         Token peek();
     };
-}
+    
+    
+
+} // namespace Sogolo
+
 
 #endif
