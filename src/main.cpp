@@ -1,6 +1,9 @@
 #include "util.hpp"
 #include "argparse.hpp"
 
+#include "lexer.hpp"
+#include "parser.hpp"
+
 void usage() 
 {
     std::cerr << "Usage: sogolo <FILENAME> <OPTIONS>" << std::endl;
@@ -55,6 +58,13 @@ int main(int argc, char const *argv[])
     if (argslots.debug_tokens) 
     {
         lexer.stream.print();
+        return EXIT_SUCCESS;
+    }
+
+    Sogolo::Parser parser(lexer.stream);
+    if (argslots.debug_ast)
+    {
+        parser.debug_print(parser.ast);
         return EXIT_SUCCESS;
     }
 
