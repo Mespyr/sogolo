@@ -1,7 +1,15 @@
-make clean
+#!/usr/bin/env sh
 
-rm -r CMakeFiles/
-rm cmake_install.cmake 
-rm CMakeCache.txt
-rm compile_commands.json
-rm Makefile
+function RUN() {
+    echo $@
+    $@
+}
+
+RUN make clean 
+
+RUN rm -r CMakeFiles/ 
+RUN rm cmake_install.cmake  
+RUN rm CMakeCache.txt 
+RUN rm compile_commands.json 
+RUN rm Makefile 
+RUN rm -r .cmake/

@@ -16,6 +16,7 @@ namespace Sogolo
         // Errors
         bool error_found = false;
         Error error;
+        std::string msg;
 
         Parser(TokenStream& s);
         ~Parser();

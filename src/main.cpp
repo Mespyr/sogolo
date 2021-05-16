@@ -62,6 +62,13 @@ int main(int argc, char const *argv[])
     }
 
     Sogolo::Parser parser(lexer.stream);
+
+    if (parser.error_found) 
+    {
+        std::cout << parser.error.repr;
+        return EXIT_FAILURE;
+    }
+
     if (argslots.debug_ast)
     {
         parser.debug_print(parser.ast);

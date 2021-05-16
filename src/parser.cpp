@@ -70,6 +70,8 @@ namespace Sogolo
                 else 
                 { 
                     error_found = true;
+                    msg = "Unexpected `[` token found while parsing.";
+                    error.set(ERROR_TYPE_PARSING, curnode.line, curnode.line_number, msg);
                     return curnode;
                 }
             }
@@ -110,6 +112,8 @@ namespace Sogolo
                     else
                     {
                         error_found = true;
+                        msg = "Unexpected `,` token found while parsing.";
+                        error.set(ERROR_TYPE_PARSING, curnode.line, curnode.line_number, msg);
                         return cn;
                     }
                 }
@@ -129,6 +133,8 @@ namespace Sogolo
                 else 
                 {
                     error_found = true;
+                    msg = "Unexpected `[` token found while parsing.";
+                    error.set(ERROR_TYPE_PARSING, curnode.line, curnode.line_number, msg);
                     return curnode;
                 }
             }
@@ -171,6 +177,8 @@ namespace Sogolo
                 else 
                 {
                     error_found = true;
+                    msg = "Unexpected `[` token found while parsing.";
+                    error.set(ERROR_TYPE_PARSING, curnode.line, curnode.line_number, msg);
                     return curnode;
                 }
             }
@@ -201,6 +209,7 @@ namespace Sogolo
                 if (stream.eof) 
                 {
                     error_found = true;
+                    error.set(ERROR_TYPE_EOF, token.line, token.line_number, msg);
                     return Node();
                 }
                 token = stream.peek();
@@ -227,6 +236,7 @@ namespace Sogolo
                 if (stream.eof) 
                 {
                     error_found = true;
+                    error.set(ERROR_TYPE_EOF, token.line, token.line_number, msg);
                     return Node();
                 }
                 token = stream.peek();
@@ -252,6 +262,7 @@ namespace Sogolo
                 if (stream.eof) 
                 {
                     error_found = true;
+                    error.set(ERROR_TYPE_EOF, token.line, token.line_number, msg);
                     return Node();
                 }
                 token = stream.peek();
@@ -263,10 +274,13 @@ namespace Sogolo
         else if (token.value == ")" || token.value == "]" || token.value == "}") 
         {
             error_found = true;
+
+            msg = "Unexpected `" + token.value + "` token found while parsing.";
+
+            error.set(ERROR_TYPE_PARSING, token.line, token.line_number, msg);
             return Node();
         }
 
-        // If node is a symbol.
         Node n(NODE_ATOM, token.line, token.line_number, token.value);
         
         // std::cout << token.value + "  " << token.line_number << std::endl;
