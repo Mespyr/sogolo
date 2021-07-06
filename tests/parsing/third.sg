@@ -21,4 +21,4 @@ decl inner = test[
     index[ls, 0][12], test_return
 ];
 
-println test_return;
+cout test_return;

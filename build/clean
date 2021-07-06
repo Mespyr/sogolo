@@ -28,3 +28,8 @@ DELETE cmake_install.cmake
 DELETE CMakeCache.txt 
 DELETE compile_commands.json 
 DELETE_DIR .cmake/
+DELETE .ninja_log
+DELETE .ninja_deps
+DELETE build.ninja
+DELETE rules.ninja
+DELETE sogolo

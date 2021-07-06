@@ -3,8 +3,8 @@
 # chars are shown by '
 
 let string = `Hello world`;
-let char_0 = string.at(0);
-println char_0;
+let char_0 = string.at[0];
+cout char_0;
 
-let string.at(0) = 'N'; # works
-println string;
+let string.at[0] = 'N'; # works
+cout string;

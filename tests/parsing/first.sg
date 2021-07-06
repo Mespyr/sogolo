@@ -3,21 +3,21 @@
 
 let x = 12;
 if (= x 12) {
-    println `True!`;
+    cout `True!`;
 }
 else {
-    println `False.`;
+    cout `False.`;
 }
 
 # nested statements
 fn func[x, y, z] {
-    println (+ x y z);
-    println (- x y z);
+    cout (+ x y z);
+    cout (- x y z);
     if (= (+ x y z) 10) {
-        println `x + y + z = 10`;
+        cout `x + y + z = 10`;
     } 
     else {
-        println `Done!`;
+        cout `Done!`;
     }
 }
 

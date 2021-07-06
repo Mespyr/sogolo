@@ -10,3 +10,8 @@ CMakeFiles/
 
 sogolo
 clean
+
+# Ninja stuff
+.ninja*
+build.ninja*
+rules.ninja

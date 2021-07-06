@@ -5,8 +5,8 @@
 
 let x = list[1, 2, 3];
 fn func[x, y] {
-    println `Hello world`;
-    println (+ x y);
+    cout `Hello world`;
+    cout (+ x y);
 }
 
 append[func, x];
