@@ -1,15 +1,30 @@
 #!/usr/bin/env sh
 
-function RUN() {
+RUN() {
     echo $@
     $@
 }
 
-RUN make clean 
+DELETE() {
+    if [ -f $1 ]; then
+        RUN rm $1
+    fi
+}
 
-RUN rm -r CMakeFiles/ 
-RUN rm cmake_install.cmake  
-RUN rm CMakeCache.txt 
-RUN rm compile_commands.json 
-RUN rm Makefile 
-RUN rm -r .cmake/
+DELETE_DIR() {
+    if [ -d $1 ]; then
+        RUN rm $1 -r
+    fi
+}
+
+
+if [ -f Makefile ]; then
+    RUN make clean 
+    RUN rm Makefile
+fi
+
+DELETE_DIR CMakeFiles/
+DELETE cmake_install.cmake  
+DELETE CMakeCache.txt 
+DELETE compile_commands.json 
+DELETE_DIR .cmake/
