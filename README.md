@@ -7,10 +7,9 @@ To build sogolo, you must have CMake installed on your computer.
 You must first clone the repository by running
 ```bash
 git clone https://github.com/Mespyr/sogolo.git
-cd sogolo
+cd sogolo/build
 ```
-
-and then move into the [build](build/) directory and run
+and run
 ```bash
 cmake ..
 make 
